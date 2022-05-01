@@ -15,7 +15,7 @@ jobs:
     - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
     - name: Install dependencies
-      run: sudo apt update && sudo apt-get install gfortran make libarpack2-dev libnetcdf-dev libnetcdff-dev &&sudo apt-get install libarpack2-dev libparpack2-dev &&sudo apt-get install libarpack++2-dev && sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev && sudo apt install libblas-dev liblapack-dev
+      run: sudo apt update && sudo apt-get install gfortran make libarpack2-dev libnetcdf-dev libnetcdff-dev &&sudo apt-get install libblas-dev liblapack-dev &&sudo apt-get install libarpack2-dev libparpack2-dev &&sudo apt-get install libarpack++2-dev && sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev && sudo apt install libblas-dev liblapack-dev
 
     - name: Configure
       run: cp config.mk.template config.mk
@@ -23,9 +23,12 @@ jobs:
     - name: Compile
       run: make
 
-    - name: Testrun
+    - name: Testrun1
       run: export PATH=$PATH:$PWD && cd SmallExample && dineof dineof.init
-
+    - name: Testrun3
+      run: export PATH=$PATH:$PWD && cd SmallExample && dineof dineof.init
+    - name: Testrun3
+      run: export PATH=$PATH:$PWD && cd SmallExample && dineof dineof.init
 
 #     - name: Build
 #       run: echo ${{ github.sha }} > Release.txt
