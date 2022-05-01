@@ -41,7 +41,7 @@ numit = 3
 !
 ! Give 'nev' the maximum number of modes you want to compute 
 
-nev = 5
+nev = 15
 
 ! Give 'neini' the minimum  number of modes you want to compute 
 
