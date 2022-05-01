@@ -32,7 +32,7 @@ jobs:
         files: |
           DINEOF
           Release.txt
-          LICENSE
+          
 # build-windows:
 
 #   runs-on: windows-latest
