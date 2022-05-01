@@ -14,7 +14,7 @@ jobs:
       run: sudo apt update && sudo apt-get install gfortran make libarpack2-dev libnetcdf-dev libnetcdff-dev && sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev
 
     - name: Configure
-      run: cp Compilers/Linux-gfortran.mk config.mk
+      run: cp config.mk.template config.mk
 
     - name: Compile
       run: make
