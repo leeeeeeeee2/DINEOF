@@ -58,6 +58,9 @@ DEBUG ?=
 
 STATIC ?= TRUE
 
+#  Activate OpenMPi
+
+OPENMP ?= TRUE
 
 #==========================================================================
 # Library names and locations
