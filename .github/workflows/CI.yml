@@ -22,7 +22,11 @@ jobs:
 
     - name: Compile
       run: make
-      
+
+    - name: Testrun
+      run: export PATH=$PATH:$PWD && cd SmallExample && dineof dineof.init
+
+
 #     - name: Build
 #       run: echo ${{ github.sha }} > Release.txt
       
