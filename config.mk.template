@@ -62,6 +62,10 @@ STATIC ?= TRUE
 
 OPENMP ?= TRUE
 
+#  Activate OFAST
+
+OFAST ?= TRUE
+
 #==========================================================================
 # Library names and locations
 # Variables name use the following naming scheme:
