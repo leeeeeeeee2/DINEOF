@@ -5,13 +5,13 @@ on: [push, pull_request]
 jobs:
   build-ubuntu:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Install dependencies
-      run: sudo apt update && sudo apt-get install gfortran make libarpack2-dev libnetcdf-dev libnetcdff-dev
+      run: sudo apt update && sudo apt-get install gfortran make libarpack2-dev libnetcdf-dev libnetcdff-dev && sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev
 
     - name: Configure
       run: cp config.mk.template config.mk
