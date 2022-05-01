@@ -19,7 +19,7 @@ jobs:
     - name: Compile
       run: make
 
-# build-windows:
+build-windows:
 
   runs-on: windows-latest
   steps:
