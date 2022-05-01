@@ -15,7 +15,7 @@ jobs:
     - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
     - name: Install dependencies
-      run: sudo apt update && sudo apt-get install gfortran make libarpack2-dev libnetcdf-dev libnetcdff-dev && sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev
+      run: sudo apt update && sudo apt-get install gfortran make libarpack2-dev libnetcdf-dev libnetcdff-dev && sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev && sudo apt-get install libopenblas-dev
 
     - name: Configure
       run: cp config.mk.template config.mk
