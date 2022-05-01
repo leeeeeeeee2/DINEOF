@@ -4,7 +4,7 @@
 
 
 F90C ?= gfortran
-F90FLAGS ?= -fimplicit-none -fopenmp
+F90FLAGS ?= -fimplicit-none
 LD ?= $(F90C)
 LDFLAGS ?= 
 
