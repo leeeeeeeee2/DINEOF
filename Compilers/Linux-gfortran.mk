@@ -18,8 +18,13 @@ PIC_CFLAGS=-fPIC
 FRTLIB=-lgfortran
 
 ifdef OPENMP
-  F90FLAGS += -fopenmp
+  F90FLAGS += -fopenmp 
   LDFLAGS += -fopenmp
+endif
+
+ifdef OFAST
+  F90FLAGS += -Ofast
+  LDFLAGS += -Ofast
 endif
 
 ifdef DEBUG
