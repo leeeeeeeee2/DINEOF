@@ -32,47 +32,54 @@ jobs:
       
   build-windows:
     runs-on: windows-2019
-    steps:
-      - name: Set up MinGW
-        uses: egor-tensin/setup-mingw@v2
-        with:
-          platform: x64
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."    
+    steps: 
+      - uses: actions/checkout@v1
       
-      - run: SET "PATH=C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%"
-      - run: curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
-      - run: curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz.sig
-      - run: pacman -U --noconfirm msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
-      - run: REM pacman -Syu --noconfirm
-      - run: REM pacman -Su --noconfirm
-      - run: pacman -S --needed --noconfirm mingw-w64-x86_64-gcc-fortran mingw-w64-x86_64-make
-      - run: pacman -S --needed --noconfirm mingw-w64-x86_64-openblas
-      - run: pacman -S --needed --noconfirm mingw-w64-x86_64-arpack mingw-w64-x86_64-lapack mingw-w64-x86_64-szip
-      - run: pacman -S --needed --noconfirm mingw-w64-x86_64-hdf5
-      - run: gcc --version
-      - run: wget https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-c-4.7.4.tar.gz
-      - run: tar -zxf netcdf-c-4.7.4.tar.gz
-      - run: cd netcdf-c-4.7.4/
-      - run: bash -c './configure --disable-shared --enable-static  --disable-dap  --disable-utilities --prefix=/mingw64/'
-      - run: make
-      - run: make install
-      - run: cd ..
-      - run: wget https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-4.5.2.tar.gz
-      - run: tar -zxf netcdf-fortran-4.5.2.tar.gz
-      - run: cd netcdf-fortran-4.5.2
-      - run: bash -c './configure --disable-shared --enable-static   --disable-dependency-tracking LIBS="-lhdf5_hl -lhdf5 -lm -lz" --prefix=/mingw64/  FCFLAGS="-w -fallow-argument-mismatch -O2"'
-      - run: make
-      - run: make install
-      - run: cd ..   
-      - run: pwd
-      - run: ls
-      - run: bash -c 'nc-config --all'
-      - run: bash -c 'nf-config --all'
-      - run: cp config.mk.template config.mk
-      - run: bash -c 'make OS=mingw LIBS="-L/usr/lib -llapack -larpack -lopenblas $(nf-config --flibs) -lszip"'
-      - run: bash -c '(cd SmallExample/; ../dineof.exe dineof.init)'
+      - name: Set up msys2
+#         uses: egor-tensin/setup-mingw@v2
+#         with:
+#           platform: x64
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MSYS
+      - shell: msys2 {0}
+        run: |
+             echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+             echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+             echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."    
+
+             SET "PATH=C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%"
+             curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
+             curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz.sig
+             pacman -U --noconfirm msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
+             REM pacman -Syu --noconfirm
+             REM pacman -Su --noconfirm
+             pacman -S --needed --noconfirm mingw-w64-x86_64-gcc-fortran mingw-w64-x86_64-make
+             pacman -S --needed --noconfirm mingw-w64-x86_64-openblas
+             pacman -S --needed --noconfirm mingw-w64-x86_64-arpack mingw-w64-x86_64-lapack mingw-w64-x86_64-szip
+             pacman -S --needed --noconfirm mingw-w64-x86_64-hdf5
+             gcc --version
+             wget https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-c-4.7.4.tar.gz
+             tar -zxf netcdf-c-4.7.4.tar.gz
+             cd netcdf-c-4.7.4/
+             bash -c './configure --disable-shared --enable-static  --disable-dap  --disable-utilities --prefix=/mingw64/'
+             make
+             make install
+             cd ..
+             wget https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-4.5.2.tar.gz
+             tar -zxf netcdf-fortran-4.5.2.tar.gz
+             cd netcdf-fortran-4.5.2
+             bash -c './configure --disable-shared --enable-static   --disable-dependency-tracking LIBS="-lhdf5_hl -lhdf5 -lm -lz" --prefix=/mingw64/  FCFLAGS="-w -fallow-argument-mismatch -O2"'
+             make
+             make install
+             cd ..   
+             pwd
+             ls
+             bash -c 'nc-config --all'
+             bash -c 'nf-config --all'
+             cp config.mk.template config.mk
+             bash -c 'make OS=mingw LIBS="-L/usr/lib -llapack -larpack -lopenblas $(nf-config --flibs) -lszip"'
+             bash -c '(cd SmallExample/; ../dineof.exe dineof.init)'
       
 #     - name: Build
 #       run: echo ${{ github.sha }} > Release.txt
