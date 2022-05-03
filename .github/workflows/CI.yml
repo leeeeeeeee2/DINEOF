@@ -42,13 +42,13 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           msystem: MSYS
-      - shell: msys2 {0}
+      - shell: powershell {0}
         run: |
          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
          echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
          echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."    
 
-         export "PATH=C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%"
+         SET "PATH=C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%"
          curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
          curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz.sig
          pacman -U --noconfirm msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
