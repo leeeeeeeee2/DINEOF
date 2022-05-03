@@ -37,14 +37,14 @@ jobs:
         include:
           - { sys: mingw64, env: x86_64 }
           - { sys: mingw32, env: i686 }
-          - { sys: ucrt64,  env: ucrt-x86_64 }  # Experimental!
-          - { sys: clang64, env: clang-x86_64 } # Experimental!
+#           - { sys: ucrt64,  env: ucrt-x86_64 }  # Experimental!
+#           - { sys: clang64, env: clang-x86_64 } # Experimental!
     steps:
       - uses: msys2/setup-msys2@v2
         with:
           msystem: ${{matrix.sys}}
           install: mingw-w64-${{matrix.env}}-openssl
-      - shell: msys2 {0}
+      - shell: cmd {0}
         run: |
           SET "PATH=C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%"
           curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
