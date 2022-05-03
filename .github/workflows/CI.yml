@@ -33,7 +33,7 @@ jobs:
   build-windows:
     runs-on: windows-2019
     steps: 
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       
       - name: Set up msys2
 #         uses: egor-tensin/setup-mingw@v2
@@ -42,7 +42,7 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           msystem: MSYS
-      - shell: powershell {0}
+      - shell: cmd {0}
         run: |
          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
          echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
