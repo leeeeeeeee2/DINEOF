@@ -41,10 +41,7 @@ jobs:
 #           msystem: MSYS
 #           platform: x64
 #       - shell: cmd {0}
-#         run: |
-#          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-#          echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-#          echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."    
+
          
       - name: install_build_script
         uses: msys2/setup-msys2@v2
@@ -52,6 +49,10 @@ jobs:
           msystem: MSYS
 #           platform: x64
       - shell: cmd {0}
+#         run: |
+#            echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+#            echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+#            echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."          
         run: |
           SET "PATH=C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%"
       - shell: cmd {0}
@@ -72,6 +73,8 @@ jobs:
       - shell: cmd {0}
         run: |
           gcc --version
+      - shell: cmd {0}
+        run: |
           wget https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-c-4.7.4.tar.gz
           tar -zxf netcdf-c-4.7.4.tar.gz
           cd netcdf-c-4.7.4/
