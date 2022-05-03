@@ -36,7 +36,7 @@ jobs:
       matrix:
         include:
           - { sys: mingw64, env: x86_64 }
-          - { sys: mingw32, env: i686 }
+#           - { sys: mingw32, env: i686 }
 #           - { sys: ucrt64,  env: ucrt-x86_64 }  # Experimental!
 #           - { sys: clang64, env: clang-x86_64 } # Experimental!
     steps:
@@ -44,11 +44,15 @@ jobs:
         with:
           msystem: ${{matrix.sys}}
           install: mingw-w64-${{matrix.env}}-openssl
-      - shell: msys2 
+      - shell: msys2  {0}
         run: |
           SET "PATH=C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%"
+      - shell: msys2  {0}
+        run: |
           curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
           curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz.sig
+      - shell: msys2  {0}
+        run: |
           pacman -U --noconfirm msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
           REM pacman -Syu --noconfirm
           REM pacman -Su --noconfirm
@@ -57,6 +61,8 @@ jobs:
           pacman -S --needed --noconfirm mingw-w64-x86_64-arpack mingw-w64-x86_64-lapack mingw-w64-x86_64-szip
           pacman -S --needed --noconfirm mingw-w64-x86_64-hdf5
           gcc --version
+      - shell: msys2  {0}
+        run: |
           wget https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-c-4.7.4.tar.gz
           tar -zxf netcdf-c-4.7.4.tar.gz
           cd netcdf-c-4.7.4/
