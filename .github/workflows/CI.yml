@@ -35,19 +35,24 @@ jobs:
     steps: 
       - uses: actions/checkout@v2
       
-      - name: Set up msys2
-#         uses: egor-tensin/setup-mingw@v2
+#       - name: Set up msys2
+#         uses: msys2/setup-msys2@v2
 #         with:
+#           msystem: MSYS
 #           platform: x64
+#       - shell: cmd {0}
+#         run: |
+#          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+#          echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+#          echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."    
+         
+      - name: install_build_script
         uses: msys2/setup-msys2@v2
         with:
           msystem: MSYS
+          platform: x64
       - shell: cmd {0}
         run: |
-         echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-         echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-         echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."    
-
          SET "PATH=C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%"
          curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
          curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz.sig
