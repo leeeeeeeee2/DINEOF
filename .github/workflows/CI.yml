@@ -46,7 +46,7 @@ jobs:
           install: mingw-w64-${{matrix.env}}-openssl
       - shell: msys2  {0}
         run: |
-          SET "PATH=C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%"
+          export "PATH=C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%"
       - shell: msys2  {0}
         run: |
           curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
