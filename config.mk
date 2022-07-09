@@ -52,7 +52,7 @@ PRECISION ?= double
 #
 #  Activate debugging compiler options:
 
-DEBUG ?=
+DEBUG ?=TRUE
 
 #  Activate static linking
 
